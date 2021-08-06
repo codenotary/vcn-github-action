@@ -16,4 +16,4 @@ else
     echo "Unsupported runner OS, aborting VCN Action"
 fi
 
-curl "$target" -o vcn"$out"
+curl -s -L "$target" -o vcn"$out" && chmod +x vcn*
