@@ -26,7 +26,8 @@ jobs:
       - name: Download VCN
         uses: codenotary/vcn-github-action@main
         with:
-            version: v0.9.8        
+            version: v0.9.8
+            asset: vcn   
       - name: Test vcn binary is available
         run: ./vcn --help; ./vcn a ./vcn
         shell: bash

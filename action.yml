@@ -7,8 +7,31 @@ inputs:
   version:
     description: 'Override latest with a specific vcn version'
     required: false
+  asset:
+    description: 'Asset to notarize/authenticate.'
+    required: false
+  mode:
+    description: 'Whether to notarize or authenticate (use only "n" for notarize and "a" for authenticate")'
+    default: n
+    required: false
+  cnil_host:
+    description: 'CodeNotary Immutable Ledger (CNIL) host.'
+    required: true
+  cnil_grpc_port:
+    description: 'CNIL gRPC port.'
+    required: false
+    default: 443
+  cnil_api_key:
+    description: 'CNIL API key.'
+    required: false
+  standard_usage:
+    description: 'False if you will NOT use the inputs but rather configure your own environment variables/and commands.'
+    default: true
 runs:
   using: 'composite'
   steps:
       - run: chmod +x ${{github.action_path}}/get-vcn.sh && bash ${{github.action_path}}/get-vcn.sh ${{ inputs.version }}
         shell: bash
+      - name: vcn action
+        if: ${{inputs.standard_usage == true}}
+        run: ./vcn ${{inputs.mode}} ${{ inputs.asset }} --lc-host ${{ inputs.cnil_host }} --lc-port ${{ inputs.cnil_grpc_port }} --lc-api-key ${{ inputs.cnil_api_key }} --bom
