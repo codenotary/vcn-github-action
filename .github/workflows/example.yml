@@ -14,8 +14,10 @@ jobs:
           ref: ${{ github.event.review.commit_id }}
 
       - name: Download VCN
-        uses: codenotary/vcn-github-action@main          
-
+        uses: codenotary/vcn-github-action@main
+        with:
+          standard_usage: false
+        
       - name: Test vcn binary is available
         run: ./vcn --help; ./vcn a ./vcn
         shell: bash
@@ -27,6 +29,8 @@ jobs:
         uses: codenotary/vcn-github-action@main
         with:
             version: v0.9.8
+            cnil_host: http://ulises.hopto.org
+            cnil_grpc_port: 8099
             asset: vcn   
       - name: Test vcn binary is available
         run: ./vcn --help; ./vcn a ./vcn

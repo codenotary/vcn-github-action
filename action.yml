@@ -27,6 +27,7 @@ inputs:
   standard_usage:
     description: 'False if you will NOT use the inputs but rather configure your own environment variables/and commands.'
     default: true
+    required: true
 runs:
   using: 'composite'
   steps:
