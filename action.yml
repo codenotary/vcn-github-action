@@ -10,5 +10,5 @@ inputs:
 runs:
   using: 'composite'
   steps:
-      - run: chmod +x ${{github.action_path}}/get-vcn.sh && bash -x ${{github.action_path}}/get-vcn.sh ${{ inputs.version }}
+      - run: chmod +x ${{github.action_path}}/get-vcn.sh && bash ${{github.action_path}}/get-vcn.sh ${{ inputs.version }}
         shell: bash
