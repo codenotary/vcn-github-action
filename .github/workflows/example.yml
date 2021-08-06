@@ -19,4 +19,3 @@ jobs:
       - name: Test vcn binary is available
         run: ./vcn --help
         shell: bash
-      - name: Build Go binary
