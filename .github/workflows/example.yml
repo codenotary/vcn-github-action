@@ -19,6 +19,9 @@ jobs:
           standard_usage: false
         
       - name: Test vcn binary is available
+        uses: codenotary/vcn-github-action@main
+        with:
+          standard_usage: false
         run: ./vcn --help; ./vcn a ./vcn
         shell: bash
 
