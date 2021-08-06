@@ -29,7 +29,7 @@ jobs:
         uses: codenotary/vcn-github-action@main
         with:
             version: v0.9.8
-            cnil_host: http://ulises.hopto.org
+            cnil_host: ulises.hopto.org
             cnil_grpc_port: 8099
             asset: vcn   
       - name: Test vcn binary is available
