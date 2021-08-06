@@ -1,0 +1,32 @@
+name: 'VCN generate and notarize BoM for Go projects'
+description: 'Uses the VCN tool from CodeNotary.com to generate and notarize the bill of materials (BoM) for Go projects and binaries.'
+branding:
+  icon: 'lock'
+  color: 'green'
+inputs:
+  asset:
+    description: 'Asset to notarize.'
+    required: true
+  cnil_host:
+    description: 'CodeNotary Immutable Ledger (CNIL) host.'
+    required: true
+  cnil_grpc_port:
+    description: 'CNIL gRPC port.'
+    required: false
+    default: 443
+  cnil_api_key:
+    description: 'CNIL API key.'
+    required: true
+runs:
+  using: 'docker'
+  image: 'docker://codenotary/vcn:bom-golang'
+  args:
+    - n
+    - ${{ inputs.asset }}
+    - --lc-host
+    - ${{ inputs.cnil_host }}
+    - --lc-port
+    - ${{ inputs.cnil_grpc_port }}
+    - --lc-api-key
+    - ${{ inputs.cnil_api_key }}
+    - --bom
