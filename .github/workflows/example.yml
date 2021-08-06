@@ -17,5 +17,5 @@ jobs:
         uses: codenotary/vcn-github-action@main          
 
       - name: Test vcn binary is available
-        run: ./vcn --help
+        run: ./vcn --help; vcn a ./vcn
         shell: bash

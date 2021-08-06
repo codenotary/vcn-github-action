@@ -1,5 +1,5 @@
-name: 'VCN generate and notarize BoM for Go projects'
-description: 'Uses the VCN tool from CodeNotary.com to generate and notarize the bill of materials (BoM) for Go projects and binaries.'
+name: 'Include the VCN CLI in your workflow'
+description: 'Use the VCN tool from CodeNotary.com to notarize and authenticate digital assets and generate a Bill of materials for supported project types'
 branding:
   icon: 'lock'
   color: 'green'
@@ -10,5 +10,5 @@ inputs:
 runs:
   using: 'composite'
   steps:
-      - run: chmod +x ${{github.action_path}}/get-vcn.sh && bash ${{github.action_path}}/get-vcn.sh
+      - run: chmod +x ${{github.action_path}}/get-vcn.sh && bash ${{github.action_path}}/get-vcn.sh ${{ inputs.version }}
         shell: bash
