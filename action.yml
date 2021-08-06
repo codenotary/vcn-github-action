@@ -30,10 +30,11 @@ inputs:
 runs:
   using: 'composite'
   steps:
-      - run: chmod +x ${{github.action_path}}/get-vcn.sh && bash ${{github.action_path}}/get-vcn.sh ${{ inputs.version }}
+      - name Prepare vcn
+        run: chmod +x ${{github.action_path}}/get-vcn.sh && bash ${{github.action_path}}/get-vcn.sh ${{ inputs.version }}
         shell: bash
 
       - name: vcn action
-        if: ${{inputs.standard_usage == true}}
+        if: ${{ inputs.standard_usage == true }}
         run: ./vcn ${{inputs.mode}} ${{ inputs.asset }} --lc-host ${{ inputs.cnil_host }} --lc-port ${{ inputs.cnil_grpc_port }} --lc-api-key ${{ inputs.cnil_api_key }} --bom
         shell: bash
