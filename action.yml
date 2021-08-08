@@ -1,4 +1,4 @@
-name: 'Include the VCN CLI in your workflow'
+name: 'VCN General-Purpose Action'
 description: 'Include/Use the VCN tool from CodeNotary to notarize and authenticate digital assets'
 branding:
   icon: 'lock'
