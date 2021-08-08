@@ -19,7 +19,7 @@ jobs:
           standard_usage: false
         
       - name: Test vcn binary is available
-        run: ls -alrht; ./vcn --help; ./vcn a ./vcn
+        run: ls -alrht; ./vcn --help;
         shell: bash
 
   get-some-other-version-vcn-binary:
@@ -29,10 +29,8 @@ jobs:
         uses: codenotary/vcn-github-action@main
         with:
             version: v0.9.8
-            cnil_host: ulises.hopto.org
-            cnil_grpc_port: 8099
-            asset: vcn   
-      - name: Test vcn binary is available
-        run: ./vcn --help; ./vcn a ./vcn
-        shell: bash
+            cnil_host: ppp.immudb.io
+            cnil_grpc_port: 33443
+            asset: vcn
+            cnil_api_key: ${{secrets.VCN_LC_API_KEY}}
 
