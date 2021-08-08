@@ -29,8 +29,8 @@ jobs:
         uses: codenotary/vcn-github-action@main
         with:
             version: v0.9.8
-            cnil_host: ppp.immudb.io
-            cnil_grpc_port: 33443
+            cnil_host: codenotary-cnil-url
+            cnil_grpc_port: 443
             asset: vcn
             cnil_api_key: ${{secrets.VCN_LC_API_KEY}}
 
