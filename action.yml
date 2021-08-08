@@ -1,5 +1,5 @@
 name: 'Include the VCN CLI in your workflow'
-description: 'Use the VCN tool from CodeNotary.com to notarize and authenticate digital assets and generate a Bill of materials for supported project types'
+description: 'Include/Use the VCN tool from CodeNotary to notarize and authenticate digital assets'
 branding:
   icon: 'lock'
   color: 'green'
