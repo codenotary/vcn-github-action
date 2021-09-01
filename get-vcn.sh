@@ -15,17 +15,17 @@ if [[ -z "${version_string}" ]]; then
 fi
 linux_file="$base_url/vcn-$version_string-linux-amd64-static"
 windows_file="$base_url/vcn-$version_string-windows-amd64.exe"
-os_name=$(uname -a)
+mac_file="$base_url/vcn-$version_string-darwin-amd64"
+os_name=$(uname -s)
 out=""
 
-if [[ "$os_name" == *"Linux"* ]]; then
-    target=$linux_file
-elif [[ "$os_name" == *"Win"* ]]; then
-    target="$windows_file"
-    out=".exe"
-else
-    echo "Unsupported runner OS, aborting VCN Action"
-fi
+case "${os_name}" in
+    Linux*)     target=$linux_file;;
+    Darwin*)    target=$mac_file;;
+    CYGWIN*)    target="$windows_file" && out=".exe";;
+    MINGW*)     target="$windows_file" && out=".exe";;
+    *)          echo "Unsupported runner OS, aborting VCN Download" && exit 1;;
+esac
 
 curl -s -L "$target" -o vcn"$out" && chmod +x vcn*
 echo "Succesfully acquired VCN binary"
