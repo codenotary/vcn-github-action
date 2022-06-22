@@ -1,6 +1,6 @@
 #!/bin/bash
 
-base_url="https://vcn-releases.codenotary.com/"
+base_url="https://vcn-releases.codenotary.com"
 
 if [[ $# -gt  0 ]]; then
     version_string=$1
