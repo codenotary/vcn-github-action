@@ -26,5 +26,14 @@ case "${os_name}" in
     *)          echo "Unsupported runner OS. Aborting VCN download." && exit 1;;
 esac
 
-curl -s -L "$target" -o vcn"$out" && chmod +x vcn*
-echo "Successfully acquired VCN binary."
+echo "Downloading vcn from $target"
+download=$(curl -s -L "$target" -o vcn"$out" && chmod +x vcn*)
+
+if [[ download != 0 ]]
+then
+  echo "VCN binary download failed."
+  echo "Exit code $download"
+else
+  echo "Successfully acquired VCN binary."
+  echo "Exit code $download"
+fi
