@@ -20,7 +20,7 @@ inputs:
   cnc_grpc_port:
     description: 'CNC gRPC port.'
     required: false
-    default: '443'
+    default: 443
   cnc_api_key:
     description: 'CNC API key.'
     required: false
