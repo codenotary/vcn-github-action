@@ -27,13 +27,19 @@ case "${os_name}" in
 esac
 
 echo "Downloading vcn from $target"
-download=$(curl -s -L "$target" -o vcn"$out" && chmod +x vcn*)
+curl -s -L "$target" -o vcn"$out" && chmod +x vcn*
 
-if [[ download != 0 ]]
+if [[ $? != 0 ]]
 then
-  echo "VCN binary download failed."
-  echo "Exit code $download"
+  echo "File download failed."
+  echo "Exit code $?"
 else
-  echo "Successfully acquired VCN binary."
-  echo "Exit code $download"
+  echo "Successfully downloaded file."
+  file -i vcn"$out" | grep -E 'executable|mach-binary|dosexec'
+  if [[ $? == 0 ]]
+  then
+    echo "File $target is executable."
+  else
+    echo "File $target is not executable."
+  fi
 fi
