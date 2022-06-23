@@ -1,37 +1,37 @@
 name: 'VCN General-Purpose Action'
-description: 'Include/Use the VCN tool from CodeNotary to notarize and authenticate digital assets'
+description: 'Include/Use the VCN tool from Codenotary to notarize and authenticate digital assets.'
 branding:
   icon: 'lock'
   color: 'green'
 inputs:
   version:
-    description: 'Override latest with a specific vcn version'
+    description: 'Override latest with a specific vcn version.'
     required: false
   asset:
     description: 'Asset to notarize/authenticate.'
     required: false
   mode:
-    description: 'Whether to notarize or authenticate (use only "n" for notarize and "a" for authenticate")'
+    description: 'Whether to notarize or authenticate (use only "n" for notarize and "a" for authenticate).'
     default: n
     required: false
-  cnil_host:
-    description: 'CodeNotary Immutable Ledger (CNIL) host.'
+  cnc_host:
+    description: 'Codenotary Cloud (CNC) host.'
     required: true
-  cnil_grpc_port:
-    description: 'CNIL gRPC port.'
+  cnc_grpc_port:
+    description: 'CNC gRPC port.'
     required: false
-    default: 443
-  cnil_api_key:
-    description: 'CNIL API key.'
+    default: '443'
+  cnc_api_key:
+    description: 'CNC API key.'
     required: false
   standard_usage:
-    description: 'False if you will NOT use the inputs but rather configure your own environment variables/and commands.'
-    default: true
+    description: 'When true uses all inputs. When false uses only the version input and everything else must be configured.'
+    default: 'true'
     required: true
 runs:
   using: 'composite'
   steps:
       - run: chmod +x ${{github.action_path}}/get-vcn.sh && bash ${{github.action_path}}/get-vcn.sh ${{ inputs.version }}
         shell: bash
-      - run: test "${{inputs.standard_usage}}" = "true" && { ./vcn ${{inputs.mode}} ${{ inputs.asset }} --lc-host ${{ inputs.cnil_host }} --lc-port ${{ inputs.cnil_grpc_port }} --lc-api-key ${{ inputs.cnil_api_key }} || exit 2; }  || exit 0
+      - run: test "${{inputs.standard_usage}}" = "true" && { ./vcn ${{inputs.mode}} ${{ inputs.asset }} --lc-host ${{ inputs.cnc_host }} --lc-port ${{ inputs.cnc_grpc_port }} --lc-api-key ${{ inputs.cnc_api_key }} || exit 2; }  || exit 0
         shell: bash
