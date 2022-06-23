@@ -1,0 +1,31 @@
+name: get-vcn
+
+on: [push]
+
+jobs:
+  latest-binary-on-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Download VCN
+        uses: codenotary/vcn-github-action@v2
+        with:
+          standard_usage: false
+        
+      - name: Test vcn binary is available
+        run: ls -alrht; ./vcn --version;
+        shell: bash
+
+  other-binary-on-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download VCN
+        uses: codenotary/vcn-github-action@v2
+        with:
+            version: v0.9.8
+            cnc_host: ${{secrets.CNC_HOST}}
+            cnc_grpc_port: 443
+            asset: vcn
+            cnc_api_key: ${{secrets.VCN_LC_API_KEY}}
