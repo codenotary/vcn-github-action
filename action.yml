@@ -1,5 +1,5 @@
 name: 'VCN General-Purpose Action'
-description: 'Include/Use the VCN tool from Codenotary to notarize and authenticate digital assets.'
+description: 'Use the VCN tool from Codenotary to verify digital assets.'
 branding:
   icon: 'lock'
   color: 'green'
@@ -8,10 +8,10 @@ inputs:
     description: 'Override latest with a specific vcn version.'
     required: false
   asset:
-    description: 'Asset to notarize/authenticate.'
+    description: 'Asset to verify.'
     required: false
   mode:
-    description: 'Whether to notarize or authenticate (use only "n" for notarize and "a" for authenticate).'
+    description: 'VCN command.'
     default: n
     required: false
   cnc_host:
@@ -31,7 +31,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-      - run: chmod +x ${{github.action_path}}/get-vcn.sh && bash ${{github.action_path}}/get-vcn.sh ${{ inputs.version }}
+      - run: chmod +x ${{github.action_path}}/get-vcn.sh && bash ${{github.action_path}}/get-vcn.sh ${{inputs.version}}
         shell: bash
-      - run: test "${{inputs.standard_usage}}" = "true" && { ./vcn ${{inputs.mode}} ${{ inputs.asset }} --lc-host ${{ inputs.cnc_host }} --lc-port ${{ inputs.cnc_grpc_port }} --lc-api-key ${{ inputs.cnc_api_key }} || exit 2; }  || exit 0
+      - run: test "${{inputs.standard_usage}}" = "true" && {./vcn ${{inputs.mode}} ${{inputs.asset}} --lc-host ${{inputs.cnc_host}} --lc-port ${{inputs.cnc_grpc_port}} --lc-api-key ${{inputs.cnc_api_key}} || exit 2;}  || exit 0
         shell: bash
