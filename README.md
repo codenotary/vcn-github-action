@@ -22,7 +22,7 @@ This will **use all the workflow inputs**, which are:
 | cnc_grpc_port | Port used to connect to Codenotary Cloud.      | 443             |
 | cnc_api_key   | API key for the ledger.                        | No default.     |
 
-**Recommended**: **[use secrets for the API key](https://docs.github.com/es/actions/reference/encrypted-secrets)**.
+**Recommended**: **[use secrets for the API key](https://docs.github.com/en/actions/security-guides/encrypted-secrets)**
 
 #### Example
 
